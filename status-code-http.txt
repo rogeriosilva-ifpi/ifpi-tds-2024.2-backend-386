@@ -1,0 +1,16 @@
+STATUS CODE:
+Sinalização sobre o Estado do Pedido (Request)
+
+# Sucesso
+200   --> OK
+201   --> CRIADO
+204   --> SEM CONTEÚDO
+
+# Erro do Cliente (Pedido)
+400   --> Bad Request (pedido mal feito)
+401   --> Acesso Negado (precisa autenticar)
+403   --> Permissão Negada (não tem privilégio)
+404   --> Recurso não localizado 
+
+# Erro do Servidor
+500   --> Server Error (Erro de programação/serviço)

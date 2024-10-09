@@ -1,0 +1,28 @@
+
+API REST - Method HTTP
+
+GET     Obter dados da API
+POST    Criar novos objetos na API
+PUT     Alterar objetos já existente na API
+DELETE  Remover objetos da API
+PATCH   Alterar parcialmente um objeto na API
+
+Dados um Recurso (veiculo)
+Ex.: CRUD de Veículo na API
+
+# Obter todos os Veículos
+GET /veiculos         200 Body(lista de veículos)
+
+# Obter um único veiculo
+GET /veiculos/{id}
+
+# Criar um novo veículo
+POST /veiculos
+
+# Alterar um veículo existente
+PUT /veiculos/{id}
+
+# Remover um veículo
+DELETE /veiculos/{id}
+
+

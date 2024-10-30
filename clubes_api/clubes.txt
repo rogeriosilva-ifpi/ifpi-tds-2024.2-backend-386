@@ -1,0 +1,8 @@
+API REST para Gerenciar Clubes de Futebol
+
+METHOD    PATH          DESCRIPTION
+GET       /clubes       Lista dos Clubes
+GET       /clubes/{id}  Detalhes do Clube do id informado
+POST      /clubes       Criar um novo Clube
+PUT       /clubes/{id}  Editar o Clube do id informado
+DELETE    /clubes/{id}  Remover o Clube do id informado

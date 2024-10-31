@@ -1,5 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 from .models import Clube
+from sqlmodel import Session, select
+from .database import get_engine
 
 
 router = APIRouter()
@@ -14,36 +16,13 @@ clubes = [
 
 
 @router.get('', status_code=status.HTTP_200_OK)
-def clubes_list(
-  uf: str | None = None, 
-  serie: str | None = None):
+def clubes_list(uf: str | None = None, serie: str | None = None):
+  session = Session(get_engine())
+  sttm = select(Clube).where(Clube.uf == uf)
+  clubes = session.exec(sttm).all()
+  return clubes
 
-  if not serie and not uf:
-    return clubes
-
-  clubes_filtrados = []
-
-  if serie and not uf:
-    for clube in clubes:
-      if clube.serie == serie:
-        clubes_filtrados.append(clube)
-    
-    return clubes_filtrados
-  
-  if uf and not serie:
-    for clube in clubes:
-      if clube.uf == uf:
-        clubes_filtrados.append(clube)
-
-    return clubes_filtrados
-  
-  # IF serie and uf
-  for clube in clubes:
-      if clube.uf == uf and clube.serie == serie:
-        clubes_filtrados.append(clube)
-
-  return clubes_filtrados
-
+ 
 
 @router.get('/{id}')
 def clube_detail(id: int):
@@ -59,7 +38,10 @@ def clube_detail(id: int):
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def clubes_create(novo_clube: Clube):
-  clubes.append(novo_clube)
+  session = Session(get_engine())
+  session.add(novo_clube)
+  session.commit()
+  session.refresh(novo_clube)
   return novo_clube
 
 

@@ -18,8 +18,16 @@ clubes = [
 @router.get('', status_code=status.HTTP_200_OK)
 def clubes_list(uf: str | None = None, serie: str | None = None):
   session = Session(get_engine())
-  sttm = select(Clube).where(Clube.uf == uf)
-  clubes = session.exec(sttm).all()
+  
+  statement = select(Clube)
+
+  if uf:
+    statement = statement.where(Clube.uf == uf)
+
+  if serie:
+    statement = statement.where(Clube.serie == serie)
+  
+  clubes = session.exec(statement).all()
   return clubes
 
  

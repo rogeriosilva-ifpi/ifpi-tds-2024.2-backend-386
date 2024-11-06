@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel, create_engine
 
 def get_engine():
-  engine = create_engine('sqlite:///clubes.db')
+  engine = create_engine('sqlite:///base_clubes.db')
 
   return engine
 

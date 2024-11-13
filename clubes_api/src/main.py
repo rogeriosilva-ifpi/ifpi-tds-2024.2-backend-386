@@ -3,6 +3,10 @@ from .clubes_controller import router as clubes_router
 from .jogadores_controller import router as jogadores_router
 from .database import init_db
 
+# Rodar
+# $ pip install -r requirements.txt
+# $ fastapi dev src/main.py
+
 
 app = FastAPI()
 

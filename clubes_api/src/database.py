@@ -1,9 +1,16 @@
 from sqlmodel import SQLModel, create_engine
+from decouple import config
 
 def get_engine():
   # engine = create_engine('sqlite:///base_clubes.db')
-                        # postgresql://usuario:senha@endereco_host:port/nome_banco
-  engine = create_engine('postgresql://postgres:postgres@localhost:5432/clubes_386')
+  # postgresql://usuario:senha@endereco_host:port/nome_banco
+  # Pegar os valores do .env
+  usuario = config('DB_USER')
+  senha = config('DB_PASS')
+  host = config('DB_HOST')
+  porta = config('DB_PORT')
+  nome = config('DB_NAME')
+  engine = create_engine(f'postgresql://{usuario}:{senha}@{host}:{porta}/{nome}')
 
   return engine
 
